@@ -23,3 +23,7 @@ app.get('/register',(req,res)=>{
 
     res.status(200).render('register');
 })
+app.get('/login',(req,res)=>{
+
+    res.status(200).render('login');
+})
