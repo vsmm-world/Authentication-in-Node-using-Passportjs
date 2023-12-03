@@ -1,33 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <style>
+        .main{
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main form label input{
+
+            margin: 10px 0px    ;
+        }
+
+        .main form{
+            margin-top: 50px;
+        }
+    </style>
 </head>
+
 <body>
+    <div class="main">
+        <form action="api/login" method="post">
 
-    <form action="api/login" method="post">
+            <label for="name">Enter Your Name
+                <input type="text" name="name" id="name" required>
+            </label><br>
+            <label for="email"> Enter Your e-mail id
+                <input type="email" name="email" id="email" required>
+            </label><br>
+            <label for="password"> Create Strong Password
+                <input type="password" name="password" id="password" required>
+            </label><br>
+            <label for="confirm_password"> Confirm Password
+                <input type="password" name="confirm_password" id="confirm_password" required>
+            </label><br>
 
-           <label for="name">Enter Your Name
-            <input type="text" name="name" id="name" required>
-           </label>
-           <label for="email">
-            <input type="email" name="email" id="email" required>
-           </label>
-           <label for="password"> Create Strong Password
-            <input type="password" name="password" id="password" required>
-           </label>
-           <label for="confirm_password">
-            <input type="password" name="confirm_password" id="confirm_password" required>
-           </label>
-
-           <input type="submit" value="submit" id="submit">
-    </form>
-
+            <input type="submit" value="submit" id="submit">
+        </form>
+    </div>
 
     <script>
-    
+
     </script>
 </body>
+
 </html>
