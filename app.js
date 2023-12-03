@@ -16,3 +16,8 @@ app.get('/',(req,res)=>{
 
     res.render('home');
 })
+
+app.get('/register',(req,res)=>{
+
+    res.status(200).render('register');
+})
