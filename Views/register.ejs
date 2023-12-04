@@ -6,19 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     <style>
-        .main{
+        .main {
 
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .main form label input{
+        .main form label input {
 
-            margin: 10px 0px    ;
+            margin: 10px 0px;
         }
 
-        .main form{
+        .main form {
             margin-top: 50px;
         }
     </style>
@@ -26,26 +26,82 @@
 
 <body>
     <div class="main">
-        <form action="api/register" method="post">
+        <form action="api/register" method="post" id="form">
 
-            <label for="name">Enter Your Name
+            <label for="name">Enter Your Name :
                 <input type="text" name="name" id="name" required>
             </label><br>
-            <label for="email"> Enter Your e-mail id
+            <label for="username">Choose Your Uniqe Username :
+                <input type="text" name="username" id="username" required>
+            </label><br>
+            <label for="email"> Enter Your e-mail id :
                 <input type="email" name="email" id="email" required>
             </label><br>
-            <label for="password"> Create Strong Password
+            <label for="password"> Create Strong Password :
                 <input type="password" name="password" id="password" required>
             </label><br>
-            <label for="confirm_password"> Confirm Password
+            <label for="confirm_password"> Confirm Password :
                 <input type="password" name="confirm_password" id="confirm_password" required>
             </label><br>
 
             <input type="submit" value="Register" id="submit">
+            <button id="cls">clear</button>
         </form>
+
+        <div class="stat" id="stat">
+
+        </div>
     </div>
 
     <script>
+
+        const name = document.getElementById('name');
+        const username = document.getElementById('username');
+        const email = document.getElementById('email');
+        const password = document.getElementById('password');
+        const confirm_password = document.getElementById('confirm_password');
+        const form = document.getElementById('form');
+        const cls = document.getElementById('cls');
+        const stat = document.getElementById('stat');
+
+        stat.style.display='none';
+
+
+        cls.addEventListener('click', () => {
+            name.value = '';
+            username.value = '';
+            email.value = '';
+            password.value = '';
+            confirm_password.value = '';
+        })
+
+        const baseURL = 'http://localhost:5000/';
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (password.value != confirm_password.value) {
+
+                return alert('Enter The Same Password again')
+            }
+
+            const res = await fetch(baseURL + 'api/register', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: name.value,
+                    username: username.value,
+                    email: email.value,
+                    password: password.value,
+                })
+            }).then(async(e) => {
+                const data =await e.json();
+                stat.style.display='block';
+                stat.innerHTML=data.message;
+                console.log(data)
+            })
+        })
+
 
     </script>
 </body>
