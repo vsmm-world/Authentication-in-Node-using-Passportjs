@@ -1,23 +1,26 @@
 const User = require('../models/user');
+const bcrypt = require('bcryptjs');
 
-const register= async(req,res,next)=>{
+const register = async (req, res, next) => {
 
-    const {name,username,email,password}= req.body;
+    const { name, username, email, password } = req.body;
 
-try{    await User.create({
-        name,
-        username,
-        email,
-        password,
-    }).then((e)=>{
+    bcrypt.hash(password, 10).then(async (hash) => {
 
-        res.status(200).json({message:"Succsess"});
-        console.log(e);
-    })}catch{
-        res.status(400).json({
-            message:'Not Registerd'
+        await User.create({
+            name,
+            username,
+            email,
+            password:hash,
+        }).then((e) => {
+
+            res.status(200).json({ message: "Succsess" });
+            console.log(e);
+        }).catch(() => {
+            res.status(400).json({
+                message: 'Not Registerd'
+            })
         })
-    }
+    })
 }
-
 module.exports = register;

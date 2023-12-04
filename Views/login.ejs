@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Login</title>
     <style>
         .main {
 
@@ -68,10 +68,12 @@
                 })
             }).then(async(e) => {
                 const data =await e.json();
-                stat.style.display = 'none'
+                stat.style.display = 'block '
                 stat.innerHTML = data.message;
 
                 console.log(data);
+            }).catch((err)=>{
+                console.log(err);
             })
 
         })

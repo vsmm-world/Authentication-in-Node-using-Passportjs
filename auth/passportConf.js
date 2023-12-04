@@ -1,4 +1,6 @@
+const { use } = require('passport');
 const User = require('../models/user');
+const bcrypt = require('bcryptjs');
 const LocalStrategy = require('passport-local').Strategy;
 
 const PassInit = (passport) => {
@@ -6,10 +8,16 @@ const PassInit = (passport) => {
     passport.use(new LocalStrategy(async (username, password, done) => {
 
         try {
-            const user = await User.findOne({ username });
 
+            const user = await User.findOne({ username });
             if (!user) return done(null, false);
-            if (user.password !== password) return done(null, false);
+            bcrypt.compare(password, user.password).then((result) => {
+
+                if (!result) {
+                    console.log(user)
+                    return done(null, false);
+                }
+            })
             return done(null, user);
 
         } catch (error) {
@@ -39,4 +47,4 @@ const isAuthenticted = (req, res, next) => {
     res.redirect('/login');
 }
 
-module.exports= {PassInit,isAuthenticted};
+module.exports = { PassInit, isAuthenticted };

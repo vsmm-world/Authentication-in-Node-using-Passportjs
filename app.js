@@ -44,9 +44,7 @@ app.get("/login", (req, res) => {
     res.status(200).render("login");
 });
 app.get('/secret',isAuthenticted,(req,res)=>{
-
     res.send(req.user);
-    res.r
 })
 app.get('/logout',(req,res)=>{
     req.logout(()=>{
@@ -55,8 +53,7 @@ app.get('/logout',(req,res)=>{
   
 });
 
-
 app.post('/api/register', register);
-app.post('/api/login',passport.authenticate('local',{failureRedirect:'/login',successRedirect:'/'}),(req,res)=>{
+app.post('/api/login',passport.authenticate('local'),(req,res)=>{
     res.status(200).json({message:"Succsess"});
 });
