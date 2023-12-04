@@ -70,8 +70,9 @@
                 const data =await e.json();
                 stat.style.display = 'block '
                 stat.innerHTML = data.message;
-
-                console.log(data);
+                if(e.status==200){
+                    window.location.href='/secret';
+                }
             }).catch((err)=>{
                 console.log(err);
             })
