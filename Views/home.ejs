@@ -10,15 +10,30 @@
             margin: 0;
             padding: 0;
         }
-
+        nav{
+            background-color: gray;
+        }
+        nav ul {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            gap: 20px;
+        }
+        nav ul li{
+            list-style: none;
+        }
+        nav ul li a{
+            text-decoration: none;
+            color: white;
+        }
         .links ul {
             display: flex;
             gap: 30px;
             align-items: center;
-            justify-items: center;
+            justify-content: center;
             margin: 50px;
             height: 100px;
-
         }
 
         .links ul li a {
@@ -33,7 +48,17 @@
 
 <body>
 
-    <h1>Welcome to Ravindra Valand's Authentication Learning Project</h1>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact Us</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+            </ul>
+        </nav>
+    </header>
     <div class="main">
 
     </div>
