@@ -73,3 +73,12 @@ app.post('/profile', upload.single('avatar'), function (req, res, next) {
     // req.body will hold the text fields, if there were any
   })
 
+// app.post('/profile', cpUpload, function (req, res, next) {
+//     // req.files is an object (String -> Array) where fieldname is the key, and the value is array of files
+//     //
+//     // e.g.
+//     //  req.files['avatar'][0] -> File
+//     //  req.files['gallery'] -> Array
+//     //
+//     // req.body will contain the text fields, if there were any
+//   })
