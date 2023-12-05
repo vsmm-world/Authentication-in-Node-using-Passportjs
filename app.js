@@ -6,13 +6,13 @@ const passport = require("passport");
 const port = process.env.port || 5000;
 const register = require('./auth/auth');
 const {PassInit,isAuthenticted} = require('./auth/passportConf');
+const multer = require('multer');
 
 
 
+// Middlwere Usages 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-
 PassInit(passport);
 app.use(expressSession({
     secret: 'secret',
@@ -27,12 +27,15 @@ app.use(passport.session());
 
 app.set("view engine", "ejs");
 
-ConnectDB();
 
+//Server Initial Setup 
+ConnectDB();
 app.listen(port, () => {
     console.log(`website is runnig at : http://localhost:${port}`);
 });
 
+
+// Get Request Handeling 
 app.get("/", (req, res) => {
     res.render("home");
 });
@@ -53,7 +56,20 @@ app.get('/logout',(req,res)=>{
   
 });
 
+
+// Post Requests Handeling
+
 app.post('/api/register', register);
 app.post('/api/login',passport.authenticate('local'),(req,res)=>{
-    res.status(200).json({message:"Succsess"}).redirect('/secret');
+    res.status(200).json({message:"Succsess"});
 });
+
+const upload = multer({ dest: 'uploads/' })
+const cpUpload = upload.fields([{ name: 'avatar', maxCount: 1 }, { name: 'gallery', maxCount: 8 }])
+app.post('/profile', upload.single('avatar'), function (req, res, next) {
+   
+        res.status(200).json({message:'File Uploaded'})
+    // req.file is the `avatar` file
+    // req.body will hold the text fields, if there were any
+  })
+
