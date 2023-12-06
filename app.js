@@ -65,14 +65,23 @@ app.post('/api/login',passport.authenticate('local'),(req,res)=>{
     res.status(200).json({message:"Succsess"});
 });
 
-const upload = multer({ dest: 'uploads/' })
-const cpUpload = upload.fields([{ name: 'avatar', maxCount: 1 }, { name: 'gallery', maxCount: 8 }])
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function(req, file, cb) {
+      cb(null, file.originalname);
+  }
+})
+const upload = multer({storage:storage})
+// const cpUpload = upload.fields([{ name: 'avatar', maxCount: 1 }, { name: 'gallery', maxCount: 8 }])
 app.post('/profile', upload.single('avatar'), function (req, res, next) {
    
         res.status(200).json({message:'File Uploaded'})
     // req.file is the `avatar` file
     // req.body will hold the text fields, if there were any
   })
+
 
 
   
