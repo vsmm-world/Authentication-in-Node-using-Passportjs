@@ -28,27 +28,7 @@
 
 
     <script>
-        const box = document.getElementById('box');
-        const baseURL = 'http://localhost:5000';
-        
-        getData();
-        
-        async function getData() {
-            try {
-                const response = await fetch(`${baseURL}/get-img`);
-                const data = await response.json();
-        
-                data.forEach(image => {
-                    const base64String = btoa(
-                        new Uint8Array(image.img.data.data).reduce((data, byte) => data + String.fromCharCode(byte), '')
-                    );
-        
-                    box.innerHTML += `<img src="data:image/${image.img.contentType};base64,${base64String}" alt="Image">`;
-                });
-            } catch (error) {
-                console.error('Error fetching images:', error);
-            }
-        }
+
         
 
     </script>
