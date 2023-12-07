@@ -69,8 +69,16 @@ app.get('/photos',async(req,res)=>{
         res.status(200).render('photos',{imgs:data})
     })
 })
-app.get('/photo',async(req,res)=>{
-      res.status(200).render('photos')
+app.get('/test',(req,res)=>{
+    res.status(200).render('test');
+})
+app.get('/get-img',async(req,res)=>{
+    const imgs = await File.find({}).then((data,err)=>{
+        if(err){
+            console.log(err);
+        }
+        res.status(200).send(data);
+    })
 })
 
 // Post Requests Handeling
