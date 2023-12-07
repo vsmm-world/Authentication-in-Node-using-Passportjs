@@ -6,12 +6,16 @@ const passport = require("passport");
 const port = process.env.port || 5000;
 const register = require('./auth/auth');
 const { PassInit, isAuthenticted } = require('./auth/passportConf');
-const {photos}= require('./middleware/imageHandler');
+// const {photos}= require('./middleware/imageHandler');
+const fs = require('fs');
+const path = require('path');
+const { upload } = require('./middleware/imageHandler');
+const File = require('./models/file');
 PassInit(passport);
 
 
 // Middlwere Usages 
-app.use('/data',require('./routes/route'));
+// app.use('/data',require('./routes/route'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(expressSession({
@@ -58,16 +62,36 @@ app.get('/logout', (req, res) => {
 });
 
 app.get('/photos',async(req,res)=>{
-    const imgs = await photos();
-    console.log(imgs);
-    res.status(200).send(imgs)
+    const imgs = await File.find({}).then((data,err)=>{
+        if(err){
+            console.log(err);
+        }
+        res.status(200).render('photos',{imgs:data})
+    })
 })
 app.get('/photo',async(req,res)=>{
       res.status(200).render('photos')
 })
 
 // Post Requests Handeling
-app.post('')
+
+app.post('/data/img',upload.single('avatar'), async (req, res) => {
+    const obj = {
+        img: {
+            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+            contentType: 'image/png'
+        }
+    }
+    await File.create(obj).then((data) => {
+        res.status(200).json(data);
+    }
+    ).catch((err) => {
+        res.status(400).json({ message: "Error" });
+    }
+    )
+
+
+});
 app.post('/api/register', register);
 app.post('/api/login', passport.authenticate('local'), (req, res) => {
     res.status(200).json({ message: "Succsess" });

@@ -5,23 +5,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Uploaded Images</title>
+    <style>
+        .images {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .images div {
+            margin: 10px;
+            border: 1px solid black;
+            padding: 10px;
+            width: 300px;
+        }
+
+        .images div img {
+            width: 100%;
+        }
+
+        .images div div {
+            padding: 10px;
+        }
+        .images div div img{
+           height: 200px;
+        }
+
+        .images div div h4 {
+            margin: 0;
+        }
+
+        .images div div p {
+            margin: 0;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="images" id="images"></div>
-
+    <div class="images" id="images">
+        <% imgs.forEach(function(image) { %>
+            <div>
+                <div>
+                    <img src="data:image/<%=image.img.contentType%>;base64,
+                <%=image.img.data.toString('base64')%>" />
+                    <div>
+                        <h4>
+                            <%=image.img.name%>
+                        </h4>
+                        <p>
+                            <%=image.img.description%>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+    </div>
     <script>
-        const images = document.getElementById('images');
-        const baseURL = 'http://localhost:5000/'
-        async function photos (){
-            const res = await fetch(baseURL+'photos');
-            const data =await res.json();
+        //how to retrieve the image from the database and display it on the page
 
-            data.forEach(e=>{
-                console.log(e);
-            })
-        }
-    photos()
+        console.log(imgs);
+
     </script>
 </body>
 

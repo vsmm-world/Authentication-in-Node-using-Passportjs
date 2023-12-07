@@ -1,28 +1,19 @@
 const express = require("express");
 const router = express.Router();
-const {upload} = require('../middleware/imageHandler');
+const { upload } = require('../middleware/imageHandler');
 const File = require('../models/file');
 const { PassInit, isAuthenticted } = require('../auth/passportConf');
 const passport = require('passport');
+const fs = require('fs');
+const path = require('path');
 PassInit(passport);
 
 
-router.route('/login').post(passport.authenticate('local'),(req,res)=>{
+router.route('/login').post(passport.authenticate('local'), (req, res) => {
     res.status(200).json({ message: "Succsess" });
 })
 
-router.route('/img').post(upload.single('avatar'),async(req,res)=>{
-    const file = new File({
-        img: {
-            data: req.file.buffer,
-            contentType: req.file.mimetype
-        }
-    });
-    await file.save().then((result)=>{
-        console.log(result);
-        res.status(200).json({message:"File Uploaded Succsessfully"});
-    })
-});
+router.route('/img').
 
 
 // const upload = multer({ storage: storage })
