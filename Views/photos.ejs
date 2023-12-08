@@ -6,6 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Uploaded Images</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        nav{
+            background-color: gray;
+        }
+        nav ul {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            gap: 20px;
+        }
+        nav ul li{
+            list-style: none;
+        }
+        nav ul li a{
+            text-decoration: none;
+            color: white;
+        }
         .images {
             display: flex;
             flex-wrap: wrap;
@@ -13,6 +34,7 @@
         }
 
         .images img {
+            border-radius: 15px;
             height: 300px;
             margin: 10px;
         }
@@ -20,6 +42,20 @@
 </head>
 
 <body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact Us</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+                <li><a href="/photos">Photos</a></li>
+                <li><a href="/test">Test</a></li>
+
+            </ul>
+        </nav>
+    </header>
     <div class="images" id="box">
 
     </div>
