@@ -6,7 +6,6 @@ const passport = require("passport");
 const port = process.env.port || 5000;
 const register = require('./auth/auth');
 const { PassInit, isAuthenticted } = require('./auth/passportConf');
-// const {photos}= require('./middleware/imageHandler');
 const fs = require('fs');
 const path = require('path');
 const { upload } = require('./middleware/imageHandler');
@@ -15,7 +14,6 @@ PassInit(passport);
 
 
 // Middlwere Usages 
-// app.use('/data',require('./routes/route'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(expressSession({
