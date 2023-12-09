@@ -14,7 +14,6 @@ const PassInit = (passport) => {
             bcrypt.compare(password, user.password).then((result) => {
 
                 if (!result) {
-                    console.log(user)
                     return done(null, false);
                 }
             })
