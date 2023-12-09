@@ -10,9 +10,11 @@
             margin: 0;
             padding: 0;
         }
-        nav{
+
+        nav {
             background-color: gray;
         }
+
         nav ul {
             display: flex;
             align-items: center;
@@ -20,19 +22,31 @@
             padding: 20px;
             gap: 20px;
         }
-        nav ul li{
+
+        nav ul li {
             list-style: none;
         }
-        nav ul li a{
+
+        nav ul li a {
             text-decoration: none;
             color: white;
+        }
+
+        main {
+            background-color: lightgray;
+            height: 100vh;
+        }
+        
+        footer {
+
+            background-color: gray;
+            height: 100px;
         }
         .links ul {
             display: flex;
             gap: 30px;
             align-items: center;
             justify-content: center;
-            margin: 50px;
             height: 100px;
         }
 
@@ -61,16 +75,22 @@
             </ul>
         </nav>
     </header>
-    <div class="main">
 
-    </div>
-    <div class="links">
-        <ul>
-            <li> <a href="/login">Login</a></li>
-            <li> <a href="/register">Register</a></li>
-            <li> <a href="/secret"> Secret Route</a></li>
-        </ul>
-    </div>
+    <main>
+        <div class="main">
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="links">
+            <ul>
+                <li> <a href="/login">Login</a></li>
+                <li> <a href="/register">Register</a></li>
+                <li> <a href="/secret"> Secret Route</a></li>
+            </ul>
+        </div>
+    </footer>
 </body>
 
 </html>
