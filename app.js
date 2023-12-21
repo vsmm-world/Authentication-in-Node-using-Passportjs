@@ -95,8 +95,6 @@ app.post('/data/img',upload.single('avatar'), async (req, res) => {
         res.status(400).json({ message: "Error" });
     }
     )
-
-
 });
 app.post('/api/register', register);
 app.post('/api/login', passport.authenticate('local'), (req, res) => {
