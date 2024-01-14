@@ -9,6 +9,7 @@ const path = require('path');
 PassInit(passport);
 
 
+
 router.route('/login').post(passport.authenticate('local'), (req, res) => {
     res.status(200).json({ message: "Succsess" });
 })
